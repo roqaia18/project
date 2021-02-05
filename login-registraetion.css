@@ -12,7 +12,7 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
+	height: 105vh;
 	margin: -20px 0 50px;
 }
 
@@ -46,7 +46,7 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #075264;
+	border: 1px solid #feffff;
 	background-color: #075264;
 	color: #FFFFFF;
 	font-size: 12px;
@@ -76,7 +76,7 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 50px;
+	padding: 5 50px;
 	height: 100%;
 	text-align: center;
 }
@@ -88,7 +88,7 @@ form {
 	padding: 12px 15px;
 	margin: 8px 0;
     width: 100%;
-    height: 40px;
+    height: 35px;
     border-radius: 1rem;
     transition: 0.2s ease-in;
 }
@@ -118,7 +118,7 @@ form {
 	overflow: hidden;
 	width: 768px;
 	max-width: 100%;
-    min-height: 570px;
+    min-height: 600px;
     
 }
 
@@ -271,3 +271,4 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+
