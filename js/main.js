@@ -1,15 +1,20 @@
 var form = document.getElementById('contact-form');
 var submit = document.getElementById('submit_form');
 var email_format = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.(?:[a-zA-Z0-9-]+)+$/ ;
+var fName;
+var lName; 
+var email; 
+var phone;
+var msg;
 
 
 submit.onclick = function(e){
     e.preventDefault();
-    var fName = document.getElementById('FName');
-    var lName = document.getElementById('LName');
-    var email = document.getElementById('email');
-    var phone = document.getElementById('phone');
-    var msg = document.getElementById('msg');
+     fName = document.getElementById('FName');
+     lName = document.getElementById('LName');
+     email = document.getElementById('email');
+     phone = document.getElementById('phone');
+     msg = document.getElementById('msg');
     var fname_error = false;
     var lname_error = false;
     var phone_error = false;
@@ -65,7 +70,7 @@ submit.onclick = function(e){
     }
 
     if(!fname_error && !lname_error && !email_error && !phone_error && !msg_error){
-        form.submit();  
+        submitDataTofirebase(); 
    }
 }
 
@@ -81,5 +86,33 @@ function validate(item,num){
             item.style.border = 'none';
         }
     }
+}
+
+function submitDataTofirebase(){
+    db.collection("Contact-messages").add({
+        first_name : fName.value,
+        last_name  : lName.value,
+        phone      : phone.value,
+        email      : email.value,
+        message    : msg.value
+    })
+    .then((docRef) => {
+        // console.log("Document written with ID: ", docRef.id);
+        var modalHeader = document.getElementById('modalHeader');
+        var modalBody = document.getElementById('modalBody');
+        var showmodal = document.getElementById('showModal');
+        modalHeader.innerHTML = 'Message sent';
+        modalBody.innerHTML = 'Thank you we will look it up';
+        showmodal.click();
+    })
+    .catch((error) => {
+        //console.error("Error adding document: ", error);
+        var modalHeader = document.getElementById('modalHeader');
+        var modalBody = document.getElementById('modalBody');
+        var showmodal = document.getElementById('showModal');
+        modalHeader.innerHTML = 'Error';
+        modalBody.innerHTML = 'Something went wrong please Send it again';
+        showmodal.click();
+    });
 }
 
