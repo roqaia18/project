@@ -6,6 +6,9 @@ var lName;
 var email; 
 var phone;
 var msg;
+var modalHeader = document.getElementById('modalHeader');
+var modalBody = document.getElementById('modalBody');
+var showmodal = document.getElementById('showModal');
 
 
 submit.onclick = function(e){
@@ -97,19 +100,11 @@ function submitDataTofirebase(){
         message    : msg.value
     })
     .then((docRef) => {
-        // console.log("Document written with ID: ", docRef.id);
-        var modalHeader = document.getElementById('modalHeader');
-        var modalBody = document.getElementById('modalBody');
-        var showmodal = document.getElementById('showModal');
         modalHeader.innerHTML = 'Message sent';
         modalBody.innerHTML = 'Thank you we will look it up';
         showmodal.click();
     })
     .catch((error) => {
-        //console.error("Error adding document: ", error);
-        var modalHeader = document.getElementById('modalHeader');
-        var modalBody = document.getElementById('modalBody');
-        var showmodal = document.getElementById('showModal');
         modalHeader.innerHTML = 'Error';
         modalBody.innerHTML = 'Something went wrong please Send it again';
         showmodal.click();
