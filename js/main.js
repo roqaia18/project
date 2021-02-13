@@ -97,7 +97,8 @@ function submitDataTofirebase(){
         last_name  : lName.value,
         phone      : phone.value,
         email      : email.value,
-        message    : msg.value
+        message    : msg.value,
+        time       : Date.now()
     })
     .then((docRef) => {
         modalHeader.innerHTML = 'Message sent';
