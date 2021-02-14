@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Orders</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="orders css/orders.css" rel="stylesheet" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #042F39;height: 60px;">
+            <div class="container">
+                <a class="navbar-brand" href="#">Construcions</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login-registration.html">Login</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Services
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Flags</a>
+                                <a class="dropdown-item" href="#">Buildings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about-us">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact-us">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container orderform">
+        <h1 class="text-center text-white" style="background-color: #042F39;">Make Your Order</h1>
+        <form id="orders_form">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="invalid-feedback">
+                    Please enter a valid e-mail.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Type of Building</label>
+                <select class="form-control" name="select" id="exampleFormControlSelect1">
+                    <option value="250">Residential Building</option>
+                    <option value="300">Residential Tower</option>
+                    <option value="400">ًWork Building</option>
+                    <option value="200">Large House</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numoffloors">Number of Floors</label>
+                <input type="number" value="1" name="floors" class="form-control" id="numoffloors" placeholder="No. of Floors">
+                <div class="invalid-feedback">
+                    Please enter the number of floors.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="area">The Area with M<sup>2</sup></label>
+                <input type="number" value="100" step="50" name="area" class="form-control" id="area" placeholder="The Area">
+                <div class="invalid-feedback">
+                    Please enter the area.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="Location of the building">
+                <div class="invalid-feedback">
+                    Please enter a valid Location.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Date">Expected Date</label>
+                <input type="date" class="form-control" name="date" id="Date" min='2020-01-01'>
+                <div class="invalid-feedback">
+                    Please enter the expected date.
+                </div>
+            </div>
+            <div>
+                <h6 for="Date">Expected Budget : <span id="budget"></span></h6>
+
+            </div>
+
+            <button class="btn btn-dark" style="background-color: #042F39;">Submit Your Order</button>
+        </form>
+        <div class="alert alert-success invisible" role="alert" id="myalert">
+            This is a success alert—check it out!
+        </div>
+    </section>
+    <footer style="background-color: #042F39; padding-top: 20px; bottom: 0%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h2 style="color: #c8d6e4;">Constructions</h2>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-mobile"></i>  0101010165667</p>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-envelope"></i>  Construct@comany.com</p>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-home"></i>  50 ali st. cairo</p>
+                </div>
+                <div class="col-3 social-container">
+                    <h2 style="color: #c8d6e4;">Useful Links</h2>
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="container">
+                <p style="color: white; text-align: center;">&copy; Constructions &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+            </div>
+    </footer>
+    <script>
+
+            //function validate(e) {
+            //    var select = getElementById('exampleFormControlSelect1').options[1].text;
+            //    console.log(select);
+
+            //    var email = /^\S+(@)\S+(.com)$/;
+            //    if (document.getElementById('location').value === "") {
+            //        e.preventDefault();
+            //        document.getElementById('location').classList.add('is-invalid');
+
+            //    }
+            //    else {
+            //        document.getElementById('location').classList.replace('is-invalid', 'is-valid');
+            //    }
+            //    if (document.getElementById('Date').value === "") {
+            //        e.preventDefault();
+            //        document.getElementById('Date').classList.add('is-invalid');
+            //    }
+            //    else {
+            //        document.getElementById('Date').classList.replace('is-invalid', 'is-valid');
+
+            //    }
+            //    if (document.getElementById('exampleInputEmail1').value === "" || !email.test(document.getElementById('exampleInputEmail1').value)) {
+            //        e.preventDefault();
+            //        document.getElementById('exampleInputEmail1').classList.add('is-invalid');
+            //    } else {
+            //        document.getElementById('exampleInputEmail1').classList.replace('is-invalid', 'is-valid');
+            //    }
+            //    if (document.getElementById('numoffloors').value === "") {
+            //        e.preventDefault();
+            //        document.getElementById('numoffloors').classList.add('is-invalid');
+            //    }
+            //    else {
+            //        document.getElementById('numoffloors').classList.replace('is-invalid', 'is-valid');
+            //    }
+            //    if (document.getElementById('area').value === "") {
+            //        e.preventDefault();
+            //        document.getElementById('area').classList.add('is-invalid');
+            //    }
+            //    else {
+            //        document.getElementById('area').classList.replace('is-invalid', 'is-valid');
+
+            //    }
+            //}
+
+
+
+
+//    'use strict';
+
+//    //grab a form
+//    const form = document.getElementById('orders_form');
+
+////grab an input
+//var Email = form.querySelector('#exampleInputEmail1');
+//var select = form.querySelector('#exampleFormControlSelect1');
+//var floors= form.querySelector('#numoffloors');
+//var area = form.querySelector('#area');
+//var location = form.querySelector('#location');
+//var date = form.querySelector('#Date');
+
+
+////config your firebase push
+//const firebaseConfig = {
+//  apiKey: "AIzaSyAdG9L5kfRQiDtRutsbQHzha0WDGk5F6ho",
+//  authDomain: "web-firebase-e8885.firebaseapp.com",
+//  databaseURL: "https://web-firebase-e8885-default-rtdb.firebaseio.com",
+//  projectId: "web-firebase-e8885",
+//  storageBucket: "web-firebase-e8885.appspot.com",
+//  messagingSenderId: "858767393250",
+//  appId: "1:858767393250:web:97183ae83838c4254579bb",
+//  measurementId: "G-4FJSL32GKT"
+//};
+
+
+////create a functions to push
+//    function firebasePush(input) {
+
+
+//        //prevents from braking
+//        if (!firebase.apps.length) {
+//            firebase.initializeApp(config);
+//        }
+
+//        //push itself
+//        var orderssRef = firebase.database().ref('Orders').push().set(
+//            {
+//                mail: input.value,
+//                typeofbuilding: input.value,
+//                floorno: input.value,
+//                location: input.value,
+//                area: input.value,
+//                date: input.value
+
+//            }
+//        );
+
+//    }
+
+////push on form submit
+//    if (form) {
+//        form.addEventListener('submit', function (evt) {
+//            evt.preventDefault();
+//            firebasePush(Email, select, floors, area, location, Date);
+
+//            //shows alert if everything went well.
+//            return alert('Data Successfully Sent to Realtime Database');
+//        })
+//    }
+    </script>
+    <script src="Orders.js"></script>
+</body>
+
+</html>
