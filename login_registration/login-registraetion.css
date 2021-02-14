@@ -33,6 +33,7 @@ p {
 	margin: 20px 0 30px;
 }
 
+
 span {
 	font-size: 12px;
 }
@@ -58,7 +59,7 @@ button {
 }
 
 button:active {
-	transform: scale(0.95);
+	transform: scale(0.85);
 }
 
 button:focus {
@@ -89,11 +90,11 @@ form {
 	margin: 8px 0;
     width: 100%;
     height: 35px;
-    border-radius: 1rem;
+    border-radius: 20px;
     transition: 0.2s ease-in;
 }
 .form-control:focus::-webkit-input-placeholder {
-    font-size: .75em;
+    font-size:15px;
     position: relative;
     top: -15px; 
     transition: 0.2s ease-out;
@@ -247,28 +248,4 @@ form {
 	width: 40px;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: 042F39;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
 

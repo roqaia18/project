@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile</title>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body id="body" onload="data1()">
+    <div class="container" id="f">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card" style="margin: 60px;">
+                    <div class="row ">
+                        <div class="col-sm-4">
+                            <div class="card card1">
+                                <div class="cardR" style="margin-top: 50px;margin-left: 95px; ">
+                                    <img id="myimg" src="profile.jpg" style="margin-bottom:20px;" class="img-radius">
+                                    <h6 id="username"></h6>
+                                </div>
+                                <button id="select" >change</button>
+                                 <button id="upload" onclick="upload()">save</button>
+                                <hr style="color: white;">
+                                <div>
+                                    <p style="color: white;"><i style="color: white;" class="fa fa-mobile"></i>
+                                        <span id="phone"></span>
+                                    </p>
+                                    <p style="color: white;"><i style="color: white;" class="fa fa-envelope"></i>
+                                        <span id="email"></span>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-sm-8">
+
+                            <a class="nav-link" href="#">Messages <span class="badge badge-danger" id="bg">0</span>
+                                <hr>
+                                <div class="row" style="margin:1px">
+
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAdG9L5kfRQiDtRutsbQHzha0WDGk5F6ho",
+            authDomain: "web-firebase-e8885.firebaseapp.com",
+            databaseURL: "https://web-firebase-e8885-default-rtdb.firebaseio.com",
+            projectId: "web-firebase-e8885",
+            storageBucket: "web-firebase-e8885.appspot.com",
+            messagingSenderId: "858767393250",
+            appId: "1:858767393250:web:97183ae83838c4254579bb",
+            measurementId: "G-4FJSL32GKT"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        var email;
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // User logged in already or has just logged in.
+                 email=user.email;
+                console.log(email);
+            } else {
+                // User not logged in or has just logged out.
+            }
+        });
+    
+function data1(){
+            document.getElementById("username").innerHTML = " ";
+            document.getElementById("phone").innerHTML = " ";
+            document.getElementById("email").innerHTML = " ";
+         return  firebase.database().ref("users/").once('value').then((snapshot) => {
+                var data = snapshot.val();
+                for (const u in data) {
+                    if(email==data[u].email){
+                        console.log(data[u].name1);
+                        console.log(data[u].name2);
+                        console.log(data[u].phone);
+                        console.log(data[u].email);
+                        document.getElementById("username").innerHTML = data[u].name1 + " " + data[u].name2;
+                        document.getElementById("phone").innerHTML = data[u].phone;
+                        document.getElementById("email").innerHTML = data[u].email;
+                        break;
+                    }
+                }
+              return   firebase.database().ref("userPic/").once('value').then((snapshot) => {
+                    var data2 = snapshot.val();
+                    console.log(data2);
+                    for (const i in data2) {
+                        if (email == data2[i].name) {
+                            document.getElementById("myimg").src = data2[i].link;
+                            break;
+                        }
+                    }
+                });
+
+                // ...
+            });
+        }
+        
+
+
+        var imgName, imgURL
+        var files = [];
+        var reader = new FileReader();
+        document.getElementById("select").onclick = function (e) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = e => {
+                files = e.target.files;
+                reader = new FileReader();
+                reader.onload = function () {
+                    document.getElementById("myimg").src = reader.result;
+                }
+                reader.readAsDataURL(files[0]);
+            }
+            input.click();
+        }
+        function upload() {
+            var userEmail = firebase.auth().currentUser.email;
+            var uploadTask = firebase.storage().ref('userimage/' + userEmail + ".png").put(files[0]);
+            uploadTask.snapshot.ref.getDownloadURL().then(function (url) {
+                imgURL = url;
+                database.ref().child("userPic/").push({
+                    name: userEmail,
+                    link: imgURL
+
+                });
+            }
+            );
+
+        }
+     
+    
+    </script>
+</body>
+
+</html>
