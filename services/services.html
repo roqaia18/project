@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+
+
+
+
+    <!--css link-->
+    <link rel="styleSheet" href="./services css/services.css">
+</head>
+<body>
+    <section class="container-sm" style="margin-top: 20px;">
+        <div class="card text-center">
+            <div class="card-header">
+                Constrcution Company
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+
+                    <img src="./images/logo.jpg" class="rounded-circle" alt="Cinque Terre" width="220" height="220">
+                </h5>
+                <p class="card-text">we are bulding many build and flages with diffrent style and moe prefect.</p>
+                <a href="#" class="btn btn-primary" id="btn">Go somewhere</a>
+            </div>
+            <div class="card-footer text-muted" id="foot_services"></div>
+
+        </div>
+        </div>
+    </section>
+    <div class="form-group container mt-4">
+        <label for="selectcity">City</label>
+        <select class="form-control" name="select" id="selectcity">
+            <option value="All">All</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Minia">Minia</option>
+        </select>
+    </div>
+    <section class="container" style="margin-top: 40px;">
+
+     
+            <div id="services-container" class="container row">
+
+            </div>
+
+     
+
+
+    </section>
+
+    <script src="services js/services.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+
+.card-header
+{
+
+ 
+     background-color: #075264;
+     color: white;
+}
+
+#btn
+{
+
+    background-color: #075264;
+    color: white;
+
+}
+#foot_services
+{
+
+
+    background-color: #075264;
+    color: white;
+
+
+}
+body{
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card-images {
+    height: 150px;
+}
+.myservices {
+    width: 300px;
+    
+}
