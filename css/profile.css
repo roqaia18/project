@@ -10,15 +10,21 @@ body{
     height: 500px;
 
 }
-.card .card1 {
-    background: -webkit-gradient(linear, left top, right top, from(#0A758F), to(#042F39));
-    background: linear-gradient(to right, #042F39, #0A758F);
+ .card1 {
+    background: -webkit-gradient(linear, left top, right top, from(#034050), to(#042F39));
+    background: linear-gradient(to right, #042F39, #034050);
     padding: 1.25rem;
     height: 500px;
     color:beige;  
+    width:100%
+}
+.card .ms{
+    width: 300px;
+    height: 200px; 
 }
  .cardR {
     text-transform:capitalize;
+    align-items: center;
 }
 
 .img-radius {
@@ -51,4 +57,24 @@ button:active {
 button:focus {
 	outline: none;
 }
+.social-container {
+	margin: 20px 0;
+    color: white;
+}
 
+.social-container a {
+	border: 1px solid #DDDDDD;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 40px;
+	width: 40px;
+   
+   
+}
+.social-container a:hover{
+    background-color: white;
+    color:#075264;
+}

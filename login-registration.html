@@ -7,6 +7,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -22,7 +23,7 @@
 
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-      <form action="#" class="needs-validation" novalidate>
+      <form action="login-registration.html" class="needs-validation" novalidate>
         <h1>Create Account</h1>
         <div class="social-container">
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -56,7 +57,7 @@
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#" id="forml">
+      <form  id="forml" action="#" >
         <h1>Sign in</h1>
         <div class="social-container">
           <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -64,12 +65,16 @@
           <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <span>or use your account</span>
-       
+
         <input type="email" class="form-control" style="width: 80%;" placeholder="Email" id="EmailL" required />
         <input type="password" class="form-control" style="width: 80%;" placeholder="Password" id="PasswordL"
           required />
-          <div class="invalid-feedback">Email is not registered or Password incorrect</div>
-  
+        <div class="invalid-feedback">Email is not registered or Password incorrect</div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="chP"> Admin
+          </label>
+        </div>
         <a href="#">Forgot your password?</a>
         <button onclick="login()">Sign In</button>
       </form>
@@ -167,17 +172,37 @@
   </script>
   <script>
     function login() {
+      var chP = document.getElementById("chP");
       var Password = document.getElementById("PasswordL").value;
       var Email = document.getElementById("EmailL").value;
-      firebase.auth().signInWithEmailAndPassword(Email, Password)
+      if (chP.checked) {
+        const db = firebase.firestore();
+    db.collection("Admin").get().then((querySnapshot) => {
+        querySnapshot.forEach(doc=>{
+            var ms =doc.data();
+            if(ms.email==Email && ms.password==Password){
+            document.getElementById("forml").action = "index.html";
+            }
+            else{
+              document.getElementById("EmailL").classList.add('is-invalid');
+          document.getElementById("PasswordL").classList.add('is-invalid');
+            }
+      })
+    })
+  }
+  else 
+      {firebase.auth().signInWithEmailAndPassword(Email, Password)
         .then((userCredential) => {
           var user = userCredential.user;
-          document.getElementById("forml").action = "profile.html";
+          document.getElementById("forml").action="home.html";
         })
         .catch(() => {
+          //e.preventDefault();
           document.getElementById("EmailL").classList.add('is-invalid');
           document.getElementById("PasswordL").classList.add('is-invalid');
+
         });
+      }
     }
   </script>
 </body>

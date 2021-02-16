@@ -1,31 +1,82 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
-
-
-
-
+  
+  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
     <!--css link-->
     <link rel="styleSheet" href="css/services.css">
 </head>
-<body>
-    <section class="container-sm" style="margin-top: 20px;">
+
+<body onload='
+console.log("hi")
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        var email = user.email;
+        console.log(email);
+        document.getElementById("signin").classList.add("d-none");
+        document.getElementById("profile").classList.remove("d-none");
+    } else {
+        console.log(email);
+        document.getElementById("order").classList.add("d-none");
+        document.getElementById("profile").classList.add("d-none");
+        document.getElementById("signin").classList.remove("d-none");
+        // User not logged in or has just logged out.
+    }
+});
+'>
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #042F39;height: 60px;">
+            <div class="container">
+                <a class="navbar-brand" href="#">Constructions</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item" id="signin">
+                            <a class="nav-link" href="login-registration.html">Sign in</a>
+                        </li>
+                        <li class="nav-item" id="profile">
+                            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+
+                        <li class="nav-item" id="order">
+                            <a class="nav-link" href="./Orders.html">Order</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <section class="container-sm" style="margin-top: 80px;">
         <div class="card text-center">
             <div class="card-header">
                 Constrcution Company
@@ -49,20 +100,48 @@
             <option value="All">All</option>
             <option value="Cairo">Cairo</option>
             <option value="Minia">Minia</option>
+            <option value="Alex">Alex</option>
         </select>
     </div>
     <section class="container" style="margin-top: 40px;">
 
-     
-            <div id="services-container" class="container row">
 
-            </div>
+        <div id="services-container" class="container row">
 
-     
+        </div>
+
+
 
 
     </section>
 
+
+    <footer style="background-color: #042F39; padding-top: 20px; ">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h2 style="color: #c8d6e4;">Constructions</h2>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-mobile"></i> 0101010165667</p>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-envelope"></i> Construct@comany.com
+                    </p>
+                    <p style="color: white;"><i style="color: white;" class="fa fa-home"></i> 50 ali st. cairo</p>
+                </div>
+                <div class="col-3 social-container">
+                    <h2 style="color: #c8d6e4;">useful Links</h2>
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="container">
+                <p style="color: white; text-align: center;">&copy; Constructions &middot; <a href="#">Privacy</a>
+                    &middot; <a href="#">Terms</a></p>
+            </div>
+    </footer>
+    <script>
+        
+    </script>
     <script src="js/services.js"></script>
 </body>
+
 </html>
